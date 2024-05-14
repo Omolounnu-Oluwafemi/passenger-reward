@@ -1,5 +1,5 @@
 import { DataTypes } from 'sequelize';
-import sequelize from '../config/config';
+import sequelize  from '../config/config.js';
 
 const User = sequelize.define('User', {
   userId: {
@@ -11,7 +11,7 @@ const User = sequelize.define('User', {
     type: DataTypes.STRING,
     allowNull: false,
   },
-  LastName: {
+  lastName: {
     type: DataTypes.STRING,
     allowNull: false,
   },
@@ -27,8 +27,7 @@ const User = sequelize.define('User', {
     type: DataTypes.STRING,
     allowNull: false
   }
-}, {
-  // Other model options go here
-});
+},
+);
 
 export default User;

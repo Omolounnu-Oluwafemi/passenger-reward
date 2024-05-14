@@ -1,9 +1,13 @@
-import User from './users.js';
-import bcrypt from 'bcrypt';
+import User from '../models/users.js';
+import bcrypt from 'bcryptjs';
 import { Op } from 'sequelize';
+// import { uuidv4 } from 'uuid';
 
 export const signUp = async (req, res) => {
-    const { firstName, lastName, email, password } = req.body;
+  // const userId = uuidv4();
+  
+  const { firstName, lastName, email, password } = req.body;
+  
   try {
     // Check if a user with the provided username or email already exists
     const existingUser = await User.findOne({
@@ -36,20 +40,20 @@ export const signUp = async (req, res) => {
       })
 
   } catch (error) {
+    console.log(error);
       return res.status(500).json({
           message: 'An error occurred while creating the user'
       });
   }
 }
-
 export const signIn = async (req, res) => {
-  const { username, password } = req.body;
+  const { email, password } = req.body;
 
   try {
     // Find the user with the provided username
     const user = await User.findOne({
       where: {
-        username: username
+        email: email
       }
     });
 

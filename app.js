@@ -1,17 +1,20 @@
-import express, { json, urlencoded } from 'express';
+import express from 'express';
 import { join } from 'path';
 import { config } from "dotenv";
-import { sequelize } from './src/config/config.js';
+import sequelize from './src/config/config.js';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import { static as expressStatic } from 'express';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
+import './src/models/transactions.js';
+import './src/models/rewards.js';
+import './src/models/association.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-import indexRouter from './src/routes/index.js';
+import transactionRouter from './src/routes/transaction.js';
 import usersRouter from './src/routes/users.js';
 
 const app = express();
@@ -30,11 +33,12 @@ config();
 app.set('views', join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
+app.use(express.json());
 app.use(logger('dev'));
 app.use(expressStatic(join(__dirname, 'public')));
 
-app.use('/', indexRouter);
 app.use('/api/users', usersRouter);
+app.use('/api/transactions', transactionRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

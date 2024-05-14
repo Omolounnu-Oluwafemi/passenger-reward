@@ -20,6 +20,11 @@ export const Login = Joi.object().keys({
   passwordConfirm: Joi.string().required(),
 });
 
+export const transaction = Joi.object().keys({
+  distanceTravelled: Joi.number().required(),
+  tripAmount: Joi.number().required()
+});
+
 export const options = {
     abortEarly: false,
     errors: {
@@ -28,3 +33,4 @@ export const options = {
         }
     }
 }
+
