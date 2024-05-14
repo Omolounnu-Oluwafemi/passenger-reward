@@ -1,10 +1,12 @@
 import User from '../models/users.js';
 import bcrypt from 'bcryptjs';
 import { Op } from 'sequelize';
-// import { uuidv4 } from 'uuid';
+import { generateToken } from '../utils/utils.js';
+import { config } from "dotenv";
+
+config();
 
 export const signUp = async (req, res) => {
-  // const userId = uuidv4();
   
   const { firstName, lastName, email, password } = req.body;
   
@@ -71,12 +73,19 @@ export const signIn = async (req, res) => {
         message: 'Invalid password'
       });
     }
+    const token = generateToken(user.userId);
 
-    return res.status(200).json({
+    return res.cookie('jwt', token,
+      {
+        httpOnly: true,
+        maxAge: 1000 * 60 * 60 * 24 * 7
+      })
+      .status(200).json({
       message: 'Logged in successfully',
       user: user
     });
   } catch (error) {
+    console.log(error)
     return res.status(500).json({
       message: 'An error occurred while logging in'
     });

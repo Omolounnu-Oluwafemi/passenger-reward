@@ -33,6 +33,7 @@ config();
 app.set('views', join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
+app.use(cookieParser());
 app.use(express.json());
 app.use(logger('dev'));
 app.use(expressStatic(join(__dirname, 'public')));
