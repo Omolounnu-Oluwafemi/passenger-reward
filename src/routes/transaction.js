@@ -1,5 +1,4 @@
 import express from "express";
-// import { Router } from 'express';
 import { authenticate, validateTransaction } from '../utils/middleware.js';
 import { newTransaction, getTransactions, getOneTransaction } from '../controllers/transaction.js';
 
