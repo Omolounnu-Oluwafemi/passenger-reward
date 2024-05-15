@@ -11,6 +11,7 @@ import { dirname } from 'path';
 import './src/models/transactions.js';
 import './src/models/rewards.js';
 import './src/models/association.js';
+import cors from 'cors';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -19,6 +20,8 @@ import transactionRouter from './src/routes/transaction.js';
 import usersRouter from './src/routes/users.js';
 
 const app = express();
+
+app.use(cors());
 
 sequelize
 .sync()
