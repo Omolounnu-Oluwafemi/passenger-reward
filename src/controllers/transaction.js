@@ -81,10 +81,27 @@ export const getTransactions = async (req, res) => {
       });
     }
 
+    // Calculate total cashback and miles points for each transaction
+    const transactionsWithTotals = transactions.map(transaction => {
+      let totalCashBack = 0;
+      let totalMilesPoints = 0;
+
+      transaction.rewards.forEach(reward => {
+        totalCashBack += reward.cashBack;
+        totalMilesPoints += reward.milesPoints;
+      });
+
+      return {
+        ...transaction.toJSON(), 
+        totalCashBack,
+        totalMilesPoints
+      };
+    });
+
     return res.status(200).json({
       status: 200,
       message: 'Transactions retrieved successfully',
-      transactions: transactions
+      transactions: transactionsWithTotals
     });
   } catch (error) {
     console.log(error)
