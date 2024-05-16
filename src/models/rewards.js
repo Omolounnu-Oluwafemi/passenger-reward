@@ -11,7 +11,7 @@ const Reward = sequelize.define('Reward', {
     type: DataTypes.UUID,
     primaryKey: true,
     references: {
-      model: 'Transactions', 
+      model: 'Users', 
       key: 'userId'
     }
   },
