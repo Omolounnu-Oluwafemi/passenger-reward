@@ -1,10 +1,9 @@
 import express from "express";
-import { authenticate, validateTransaction } from '../utils/middleware.js';
+import { validateTransaction } from '../utils/middleware.js';
 import { newTransaction, getTransactions, getOneTransaction } from '../controllers/transaction.js';
 
 const router = express.Router();
 
-// router.use(authenticate);
 router.post('/new/:userId', validateTransaction, newTransaction);
 router.get('/:userId/all', getTransactions);
 router.get('/one/:transactionId', getOneTransaction);
