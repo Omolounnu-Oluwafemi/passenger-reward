@@ -64,12 +64,22 @@ export const newTransaction = async (req, res) => {
 };
 export const getTransactions = async (req, res) => {
   try {
-        const transactions = await Transaction.findAll({
+    const userId = req.params.userId; 
+
+    const transactions = await Transaction.findAll({
+      where: { userId: userId }, 
       include: [{
         model: Reward,
         as: 'rewards'
       }]
     });
+
+        if (transactions.length === 0) {
+      return res.status(200).json({
+        status: 200,
+        message: 'No transactions found for this user yet. You should navigate to the new Trip page to get claiming your rewards',
+      });
+    }
 
     return res.status(200).json({
       status: 200,

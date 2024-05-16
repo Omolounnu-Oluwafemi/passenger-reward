@@ -4,9 +4,9 @@ import { newTransaction, getTransactions, getOneTransaction } from '../controlle
 
 const router = express.Router();
 
-router.use(authenticate);
+// router.use(authenticate);
 router.post('/new/:userId', validateTransaction, newTransaction);
-router.get('/all', getTransactions);
+router.get('/:userId/all', getTransactions);
 router.get('/one/:transactionId', getOneTransaction);
 
 // Error handling middleware

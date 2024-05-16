@@ -6,8 +6,7 @@ import { config } from "dotenv";
 
 config();
 
-export const signUp = async (req, res) => {
-  
+export const signUp = async (req, res) => {  
   const { firstName, lastName, email, password } = req.body;
   
   try {
@@ -21,10 +20,11 @@ export const signUp = async (req, res) => {
     });
 
       if (existingUser) {
-      return  res.status(400).json({ 
-          message: 'A user with this email already exists'
-      });
-    }
+        return res.status(400).json({ 
+          message: 'A user with this email already exists',
+          });
+      }
+  
     // Hash the password
     const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -44,7 +44,8 @@ export const signUp = async (req, res) => {
   } catch (error) {
     console.log(error);
       return res.status(500).json({
-          message: 'An error occurred while creating the user'
+        message: 'An error occurred while creating the user',
+        error: error.message
       });
   }
 }
@@ -75,8 +76,7 @@ export const signIn = async (req, res) => {
     }
     const token = generateToken(user.userId);
 
-    return res.cookie('jwt', token,
-      {
+    return res.cookie('jwt', token,{
         httpOnly: true,
         maxAge: 1000 * 60 * 60 * 24 * 7
       })

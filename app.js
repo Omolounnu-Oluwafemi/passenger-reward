@@ -21,7 +21,12 @@ import usersRouter from './src/routes/users.js';
 
 const app = express();
 
-app.use(cors());
+const corsOptions = {
+  origin: 'http://localhost:5173', 
+  credentials: true, 
+};
+
+app.use(cors(corsOptions));
 
 sequelize
 .sync()

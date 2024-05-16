@@ -8,7 +8,7 @@ export const signUp = Joi.object().keys({
     .regex(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,30}$/)
     .message('Password must contain at least one uppercase letter, one lowercase letter, one of these symbols (@$!%*?&#) , one digit, and be between 8 and 30 characters in length.')
     .required(),
-  passwordConfirm: Joi.string().required(),
+  passwordConfirm: Joi.string().valid(Joi.ref('password')).required().messages({'any.only': 'Passwords do not match.'}),
 });
 
 export const Login = Joi.object().keys({
@@ -17,7 +17,6 @@ export const Login = Joi.object().keys({
     .regex(/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,30}$/)
     .message('Password must contain at least one uppercase letter, one lowercase letter, one of these symbols (@$!%*?&#) , one digit, and be between 8 and 30 characters in length.')
     .required(),
-  passwordConfirm: Joi.string().required(),
 });
 
 export const transaction = Joi.object().keys({
