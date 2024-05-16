@@ -96,6 +96,11 @@ export const getTransactions = async (req, res) => {
       });
     });
 
+    // Round off the values to 2 decimal places
+    totalCashBack = parseFloat(totalCashBack.toFixed(2));
+    totalMilesPoints = parseFloat(totalMilesPoints.toFixed(2));
+    totalDistanceTravelled = parseFloat(totalDistanceTravelled.toFixed(2));
+
     return res.status(200).json({
       status: 200,
       message: 'Transactions retrieved successfully',

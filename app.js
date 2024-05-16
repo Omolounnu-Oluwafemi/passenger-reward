@@ -21,12 +21,11 @@ import usersRouter from './src/routes/users.js';
 
 const app = express();
 
-const corsOptions = {
-  origin: ['http://localhost:5173', 'https://passenger-reward-clientside.vercel.app'],
-  credentials: true, 
-};
+app.use(cors({
+  origin: ['https://passenger-reward-clientside.vercel.app', 'http://localhost:5173',]
+}));
 
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions));
 
 sequelize
 .sync()
