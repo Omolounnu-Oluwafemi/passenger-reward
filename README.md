@@ -13,22 +13,40 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Installing
 
-1. Clone the repository: `git clone https://github.com/Omolounnu-Oluwafemi/passenger-reward.git`
-2. Navigate into the project directory: `cd passenger-reward`
-3. Install the dependencies: `yarn install`
+1. Clone the repository: 
+```sh
+git clone https://github.com/Omolounnu-Oluwafemi/passenger-reward.git
+```
+
+3. Navigate into the project directory: 
+```sh
+ cd passenger-reward
+```
+
+4. Install the dependencies:
+```sh
+yarn install
+```
 
 ## Running the Application
 
-To start the application, run: `yarn start`
+To start the application, run: 
+```sh
+yarn start
+```
+
 
 ## Running the Tests
 
-To run the tests, run: `yarn test`
+To run the tests, run: 
+```sh
+yarn test
+```
 
 ## Built With
 
 - [Express](https://expressjs.com/) - The web framework used
-- [Sequelize](https://sequelize.org/) - Promise-based Node.js ORM for Postgres, MySQL, MariaDB, SQLite and Microsoft SQL Server
+- [Sequelize](https://sequelize.org/) - Promise-based Node.js ORM for Postgres, MySQL, MariaDB, SQLite, and Microsoft SQL Server
 
 ## API Endpoints
 
