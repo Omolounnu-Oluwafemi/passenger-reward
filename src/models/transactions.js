@@ -6,6 +6,7 @@ const Transaction = sequelize.define('Transaction', {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,
     primaryKey: true,
+    unique: true,
   },
   userId: {
     type: DataTypes.UUID,
