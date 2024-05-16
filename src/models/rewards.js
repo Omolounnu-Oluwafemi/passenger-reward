@@ -26,12 +26,19 @@ const Reward = sequelize.define('Reward', {
   cashBack: {
     type: DataTypes.FLOAT,
     allowNull: false,
+    get() {
+      const rawValue = this.getDataValue('cashBack');
+      return parseFloat(rawValue.toFixed(2));
+    }
   },
   milesPoints: {
     type: DataTypes.FLOAT,
     allowNull: false,
+    get() {
+      const rawValue = this.getDataValue('milesPoints');
+      return parseFloat(rawValue.toFixed(2));
+    }
   }
-}
-);
+});
 
 export default Reward;

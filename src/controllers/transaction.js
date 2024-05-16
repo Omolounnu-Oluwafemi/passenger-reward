@@ -74,34 +74,35 @@ export const getTransactions = async (req, res) => {
       }]
     });
 
-        if (transactions.length === 0) {
+    if (transactions.length === 0) {
       return res.status(200).json({
         status: 200,
         message: 'No transactions found for this user yet. You should navigate to the new Trip page to get claiming your rewards',
       });
     }
 
-    // Calculate total cashback and miles points for each transaction
-    const transactionsWithTotals = transactions.map(transaction => {
-      let totalCashBack = 0;
-      let totalMilesPoints = 0;
+    // Calculate total cashback and miles points across all transactions
+    let totalCashBack = 0;
+    let totalMilesPoints = 0;
+    let totalDistanceTravelled = 0;
+
+    transactions.forEach(transaction => {
+
+      totalDistanceTravelled += transaction.distanceTravelled;
 
       transaction.rewards.forEach(reward => {
         totalCashBack += reward.cashBack;
         totalMilesPoints += reward.milesPoints;
       });
-
-      return {
-        ...transaction.toJSON(), 
-        totalCashBack,
-        totalMilesPoints
-      };
     });
 
     return res.status(200).json({
       status: 200,
       message: 'Transactions retrieved successfully',
-      transactions: transactionsWithTotals
+      transactions: transactions,
+      totalCashBack,
+      totalMilesPoints,
+      totalDistanceTravelled
     });
   } catch (error) {
     console.log(error)
@@ -110,7 +111,7 @@ export const getTransactions = async (req, res) => {
       message: 'An error occurred while retrieving the transactions'
     });
   }
-};
+}; 
 export const getOneTransaction = async (req, res) => { 
     const { transactionId } = req.params;
     
