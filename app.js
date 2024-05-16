@@ -21,12 +21,6 @@ import usersRouter from './src/routes/users.js';
 
 const app = express();
 
-app.use(cors({
-  origin: ['https://passenger-reward-clientside.vercel.app', 'http://localhost:5173',]
-}));
-
-// app.use(cors(corsOptions));
-
 sequelize
 .sync()
 .then(()=>{
@@ -41,6 +35,9 @@ config();
 app.set('views', join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
+app.use(cors({
+  origin: ['https://passenger-reward-clientside.vercel.app', 'http://localhost:5173',]
+}));
 app.use(cookieParser());
 app.use(express.json());
 app.use(logger('dev'));
