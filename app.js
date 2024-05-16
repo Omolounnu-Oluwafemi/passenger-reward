@@ -36,7 +36,7 @@ app.set('views', join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 app.use(cors({
-  origin: ['https://passenger-reward-clientside.vercel.app', 'http://localhost:5173',]
+  origin: ['https://passenger-reward-clientside.vercel.app']
 }));
 app.use(cookieParser());
 app.use(express.json());
